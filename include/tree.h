@@ -5,7 +5,7 @@
 #include <vector>
 #include <algorithm>
 
-class Tree {
+class TreeNode {
  public:
   char ch;
   int tr = 0;
