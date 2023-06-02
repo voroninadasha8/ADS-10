@@ -5,42 +5,41 @@
 #include <vector>
 #include <algorithm>
 
-class TreeNode {
- public:
-  char ch;
-  int tr = 0;
-  std::vector<TreeNode*> vec;
-};
 class Tree {
  private:
-  TreeNode* root;
-  std::vector<std::vector<char>> allperms;
-  void createallperms(TreeNode* root, std::vector<char> v) {
-    if (!root->tr) {
-      v.push_back(root->ch);
-    }
-    if (!root->vec.empty()) {
-      for (TreeNode* next : root->vec) {
-        createallperms(next, v);
-      }
-    } else {
-      allperms.emplace_back(v);
-    }
+ struct Node {
+  char ch;
+  int tr = 0;
+  std::vector<Node*> vec;
+ };
+ Node* root;
+ std::vector<std::vector<char>> allperms;
+ void createallperms(Node* root, std::vector<char> v) {
+  if (!root->tr) {
+   v.push_back(root->ch);
   }
-  void create(TreeNode* root, const std::vector& in) {
-    for (char ch : in) {
-      auto* temp = new TreeNode;
-      temp->ch = ch;
-      root->vec.emplace_back(temp);
-      std::vector<char> remains = in;
-      remains.erase(std::find(remains.begin(), remains.end(), ch));
-      create(temp, remains);
-    }
+  if (!root->vec.empty()) {
+   for (TreeNode* next : root->vec) {
+    createallperms(next, v);
+   }
+  } else {
+   allperms.emplace_back(v);
   }
+ }
+ void create(Node* root, const std::vector<char>& in) {
+  for (char ch : in) {
+   Node* temp = new Node;
+   temp->ch = ch;
+   root->vec.emplace_back(temp);
+   std::vector<char> remains = in;
+   remains.erase(std::find(remains.begin(), remains.end(), ch));
+   create(temp, remains);
+  }
+ }
 
  public:
-  explicit Tree(std::vector in) {
-    root = new TreeNode;
+  explicit Tree(std::vector<char> in) {
+    root = new Node;
     root->ch = ' ';
     root->tr = 1;
     create(root, in);
