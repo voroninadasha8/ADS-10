@@ -37,6 +37,7 @@ class Tree {
     addNode(root, row);
     evadeTree(root, {});
   }
+
  public:
   explicit Tree(std::vector init) :root(nullptr) {
     createPermutations(init);
