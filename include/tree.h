@@ -11,7 +11,7 @@ class Tree {
     explicit Node(char symbol_ = '\0') :symbol(symbol_) {}
   };
   Node* root;
-  std::vector<std::vector> permutations;
+  std::vector<std::vector<char>> permutations;
   void addNode(Node* newroot, std::vector<char> row) {
     if (!newroot) {
         root = newroot = new Node;
@@ -39,10 +39,10 @@ class Tree {
   }
 
  public:
-  explicit Tree(std::vector init) :root(nullptr) {
+  explicit Tree(std::vector<char> init) :root(nullptr) {
     createPermutations(init);
   }
-  std::vector<std::vector> getPerm() const {
+  std::vector<std::vector<char>> getPerm() const {
     return permutations;
   }
 };
